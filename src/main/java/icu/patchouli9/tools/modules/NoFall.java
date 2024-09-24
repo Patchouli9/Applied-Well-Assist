@@ -1,0 +1,26 @@
+package icu.patchouli9.tools.modules;
+
+import icu.patchouli9.tools.ModuleManager.Module;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.network.NetHandlerPlayClient;
+import net.minecraft.network.play.client.C03PacketPlayer;
+import net.minecraft.util.ChatComponentText;
+import org.apache.logging.log4j.LogManager;
+
+public class NoFall extends Module {
+    public NoFall(String name, int key) {
+        super(name, key);
+    }
+
+    @Override
+    public void update()  {
+        Minecraft MC = Minecraft.getMinecraft();
+        if(MC.thePlayer != null && MC.thePlayer.fallDistance>=3) {
+            //mc.thePlayer.addChatMessage(new ChatComponentText("Falling!"));
+            NetHandlerPlayClient connection = MC.getNetHandler();
+            if (connection != null) {
+                connection.addToSendQueue(new C03PacketPlayer(true));
+            }
+        }
+    }
+}

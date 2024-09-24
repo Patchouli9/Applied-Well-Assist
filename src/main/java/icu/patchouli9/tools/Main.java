@@ -10,19 +10,20 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = Main.MODID, version = Tags.VERSION, name = "MyMod", acceptedMinecraftVersions = "[1.7.10]")
+import java.io.IOException;
+
+@Mod(modid = Main.MODID, version = Tags.VERSION, name = "Tools", acceptedMinecraftVersions = "[1.7.10]")
 public class Main {
 
     public static final String MODID = "tools";
     public static final Logger LOG = LogManager.getLogger(MODID);
-
-    @SidedProxy(clientSide = "com.myname.mymodid.ClientProxy", serverSide = "com.myname.mymodid.CommonProxy")
+    @SidedProxy(clientSide = "icu.patchouli9.tools.ClientProxy", serverSide = "icu.patchouli9.tools.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
     // GameRegistry." (Remove if not needed)
-    public void preInit(FMLPreInitializationEvent event) {
+    public void preInit(FMLPreInitializationEvent event) throws IOException, IllegalAccessException {
         proxy.preInit(event);
     }
 

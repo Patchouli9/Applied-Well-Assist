@@ -24,8 +24,8 @@ public class Fly extends Module {
         player.motionY = 0;
         player.motionZ = 0;
 
-        float multiplier=1;
-        if(gameSettings.keyBindSprint.getIsKeyPressed()) multiplier=3;
+        float multiplier = 1;
+        if (gameSettings.keyBindSprint.getIsKeyPressed()) multiplier = 3;
 
         float strafe = 0.0F;
         float forward = 0.0F;
@@ -40,8 +40,6 @@ public class Fly extends Module {
 
         // player.motionX = moveForward;
         // player.motionZ = moveStrafe;
-
-
 
         player.motionY = upward * multiplier;
 

@@ -24,6 +24,9 @@ public class Fly extends Module {
         player.motionY = 0;
         player.motionZ = 0;
 
+        float multiplier=1;
+        if(gameSettings.keyBindSprint.getIsKeyPressed()) multiplier=3;
+
         float strafe = 0.0F;
         float forward = 0.0F;
         float upward = 0.0F;
@@ -37,7 +40,10 @@ public class Fly extends Module {
 
         // player.motionX = moveForward;
         // player.motionZ = moveStrafe;
-        player.motionY = upward;
+
+
+
+        player.motionY = upward * multiplier;
 
         float f3 = strafe * strafe + forward * forward;
 
@@ -51,8 +57,8 @@ public class Fly extends Module {
         forward *= f3;
         float f4 = MathHelper.sin(player.rotationYaw * (float) Math.PI / 180.0F);
         float f5 = MathHelper.cos(player.rotationYaw * (float) Math.PI / 180.0F);
-        player.motionX = strafe * f5 - forward * f4;
-        player.motionZ = forward * f5 + strafe * f4;
+        player.motionX = (strafe * f5 - forward * f4) * multiplier;
+        player.motionZ = (forward * f5 + strafe * f4) * multiplier;
         // modified from net.minecraft.entity.Entity.moveFlying
 
         //

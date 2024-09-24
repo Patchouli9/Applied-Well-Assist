@@ -1,5 +1,7 @@
 package icu.patchouli9.tools;
 
+import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,8 +11,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-
-import java.io.IOException;
 
 @Mod(modid = Main.MODID, version = Tags.VERSION, name = "Tools", acceptedMinecraftVersions = "[1.7.10]")
 public class Main {

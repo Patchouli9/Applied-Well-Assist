@@ -1,27 +1,31 @@
 package icu.patchouli9.tools;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ChatComponentText;
+import net.minecraftforge.common.MinecraftForge;
+
+import org.lwjgl.input.Keyboard;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import icu.patchouli9.tools.ModuleManager.Module;
 import icu.patchouli9.tools.ModuleManager.ModuleManager;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ChatComponentText;
-import net.minecraftforge.common.MinecraftForge;
-import org.lwjgl.input.Keyboard;
 
 public class EventHandler {
 
-    public void init(){
+    public void init() {
         MinecraftForge.EVENT_BUS.register(this);
-        FMLCommonHandler.instance().bus().register(this);
+        FMLCommonHandler.instance()
+            .bus()
+            .register(this);
     }
 
-//    @SubscribeEvent
-//    public void Test(TickEvent.PlayerTickEvent event) {
-//        Main.LOG.info("1");
-//    }
+    // @SubscribeEvent
+    // public void Test(TickEvent.PlayerTickEvent event) {
+    // Main.LOG.info("1");
+    // }
 
     @SubscribeEvent
     public void PlayerTick(TickEvent.PlayerTickEvent event) throws Exception {
@@ -33,6 +37,7 @@ public class EventHandler {
             }
         }
     }
+
     @SubscribeEvent
     public void RenderTick(TickEvent.RenderTickEvent event) throws Exception {
         if (ModuleManager.modules != null) {
@@ -43,6 +48,7 @@ public class EventHandler {
             }
         }
     }
+
     @SubscribeEvent
     public void keyInputEvent(InputEvent.KeyInputEvent event) throws Exception {
         if (ModuleManager.modules != null) {
@@ -58,8 +64,8 @@ public class EventHandler {
                         Main.LOG.info(module.key + " is pressed");
                         module.set(!module.enabled);
                         if (Minecraft.getMinecraft().thePlayer != null) {
-                            Minecraft.getMinecraft().thePlayer.addChatMessage(
-                                new ChatComponentText(module.name + ": " + module.enabled));
+                            Minecraft.getMinecraft().thePlayer
+                                .addChatMessage(new ChatComponentText(module.name + ": " + module.enabled));
                         }
                     }
                 }

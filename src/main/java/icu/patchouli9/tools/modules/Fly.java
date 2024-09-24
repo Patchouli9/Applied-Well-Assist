@@ -1,17 +1,14 @@
 package icu.patchouli9.tools.modules;
 
-import icu.patchouli9.tools.ModuleManager.Module;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-import org.lwjgl.input.Keyboard;
 
-import java.security.Key;
+import icu.patchouli9.tools.ModuleManager.Module;
 
 public class Fly extends Module {
+
     public Fly(String name, int key) {
         super(name, key);
     }
@@ -38,8 +35,8 @@ public class Fly extends Module {
         if (gameSettings.keyBindJump.getIsKeyPressed()) ++upward;
         if (gameSettings.keyBindSneak.getIsKeyPressed()) --upward;
 
-//        player.motionX = moveForward;
-//        player.motionZ = moveStrafe;
+        // player.motionX = moveForward;
+        // player.motionZ = moveStrafe;
         player.motionY = upward;
 
         float f3 = strafe * strafe + forward * forward;
@@ -53,12 +50,12 @@ public class Fly extends Module {
         player.motionZ = forward * f5 + strafe * f4;
         // modified from net.minecraft.entity.Entity.moveFlying
 
-//
-//        vehicle.moveEntity(0,0.3,0);
+        //
+        // vehicle.moveEntity(0,0.3,0);
 
-//        if(Keyboard.isKeyDown(W.getKeyCode())){
-//
-//        }
+        // if(Keyboard.isKeyDown(W.getKeyCode())){
+        //
+        // }
     }
 
 }

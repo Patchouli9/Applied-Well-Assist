@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 
 import icu.patchouli9.tools.Config;
 import icu.patchouli9.tools.Main;
+import icu.patchouli9.tools.modules.AutoHit;
 import icu.patchouli9.tools.modules.Fly;
 import icu.patchouli9.tools.modules.NoFall;
 
@@ -50,6 +51,7 @@ public class ModuleManager {
         public static Module NoFall = new NoFall("NoFall", Keyboard.KEY_N);
         // public static Module XYZ = new XYZ("XYZ", Keyboard.KEY_X);
         public static Module Fly = new Fly("Fly", Keyboard.KEY_H);
+        public static Module AutoHit = new AutoHit("AutoHit", Keyboard.KEY_EQUALS);
         // public static Module Speed = new Speed("Speed", Keyboard.KEY_C);
 
         // public static Module Suicide = new Suicide("Suicide", Keyboard.KEY_G);

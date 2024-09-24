@@ -40,6 +40,11 @@ public class Fly extends Module {
         player.motionY = upward;
 
         float f3 = strafe * strafe + forward * forward;
+
+        if (f3 == 0) {
+            return;
+        }
+
         f3 = MathHelper.sqrt_float(f3);
         f3 = 1 / f3;
         strafe *= f3;

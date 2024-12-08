@@ -20,6 +20,9 @@ public class Main {
     @SidedProxy(clientSide = "icu.patchouli9.tools.ClientProxy", serverSide = "icu.patchouli9.tools.CommonProxy")
     public static CommonProxy proxy;
 
+    @Mod.Instance(MODID)
+    public static Main instance;
+
     @Mod.EventHandler
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
     // GameRegistry." (Remove if not needed)
@@ -43,5 +46,21 @@ public class Main {
     // register server commands in this event handler (Remove if not needed)
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
+    }
+
+    public static void debug(String message) {
+        LOG.debug(message);
+    }
+
+    public static void info(String message) {
+        LOG.info(message);
+    }
+
+    public static void warn(String message) {
+        LOG.warn(message);
+    }
+
+    public static void error(String message) {
+        LOG.error(message);
     }
 }

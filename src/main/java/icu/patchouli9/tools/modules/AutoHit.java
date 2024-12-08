@@ -21,12 +21,10 @@ public class AutoHit extends Module {
 
     @Override
     public void update() {
-        Minecraft MC = Minecraft.getMinecraft();
         EntityClientPlayerMP player = MC.thePlayer;
         if (player == null) return;
-        int scanRadius = 8;
+        int scanRadius = 4;
         AxisAlignedBB scanArea = player.boundingBox.expand(scanRadius, scanRadius, scanRadius);
-
         List<Entity> entities = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, scanArea);
         // Main.LOG.info("entities: "+entities);
         for (Entity entity : entities) {

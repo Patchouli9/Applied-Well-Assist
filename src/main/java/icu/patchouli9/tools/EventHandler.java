@@ -14,14 +14,12 @@ import icu.patchouli9.tools.ModuleManager.Module;
 import icu.patchouli9.tools.ModuleManager.ModuleManager;
 
 public class EventHandler {
-
     public void init() {
         MinecraftForge.EVENT_BUS.register(this);
         FMLCommonHandler.instance()
             .bus()
             .register(this);
     }
-
     // @SubscribeEvent
     // public void Test(TickEvent.PlayerTickEvent event) {
     // Main.LOG.info("1");
@@ -60,7 +58,7 @@ public class EventHandler {
                         module.keyInput(key);
                     }
 
-                    if (Keyboard.isKeyDown(module.key)) {
+                    if (module.keybind.getIsKeyPressed()) {
                         Main.LOG.info(module.key + " is pressed");
                         module.set(!module.enabled);
                         if (Minecraft.getMinecraft().thePlayer != null) {

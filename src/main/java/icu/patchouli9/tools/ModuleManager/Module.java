@@ -2,19 +2,25 @@ package icu.patchouli9.tools.ModuleManager;
 
 import icu.patchouli9.tools.Config;
 import icu.patchouli9.tools.Main;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.KeyBinding;
 
 public class Module {
 
     public final String name;
     public final int key;
+    public final KeyBinding keybind;
     public boolean enabled = false;
-
+    protected final Minecraft MC = Minecraft.getMinecraft();
     public Module(String name, int key) {
         this.name = name;
         this.key = key;
+        this.keybind=new KeyBinding(name, key, "Patchouli9's Tools");
     }
 
-    public void disabled() throws Exception {}
+    public void disable() throws Exception {}
+
+    public void init() throws Exception {}
 
     public void update() throws Exception {}
 
@@ -24,16 +30,16 @@ public class Module {
 
     }
 
-    public void enabled() throws Exception {}
+    public void enable() throws Exception {}
 
     public void set(boolean enabled) throws Exception {
         this.enabled = enabled;
 
         if (enabled) {
-            enabled();
+            enable();
             Config.json.addProperty(this.name, true);
         } else {
-            disabled();
+            disable();
             try {
                 Config.json.addProperty(this.name, false);
             } catch (Exception e) {

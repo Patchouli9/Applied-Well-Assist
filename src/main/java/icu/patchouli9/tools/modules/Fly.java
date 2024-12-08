@@ -8,14 +8,12 @@ import net.minecraft.util.MathHelper;
 import icu.patchouli9.tools.ModuleManager.Module;
 
 public class Fly extends Module {
-
     public Fly(String name, int key) {
         super(name, key);
     }
 
     @Override
     public void update() {
-        Minecraft MC = Minecraft.getMinecraft();
         EntityClientPlayerMP player = MC.thePlayer;
         GameSettings gameSettings = MC.gameSettings;
         if (player == null) return;

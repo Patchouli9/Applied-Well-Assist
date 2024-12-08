@@ -18,7 +18,6 @@ public class XYZ extends Module {
 
     @Override
     public void render() {
-        Minecraft MC = Minecraft.getMinecraft();
         EntityClientPlayerMP player = MC.thePlayer;
         if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && player != null) {
             Vec3 pos = player.getPosition(1.0F);

@@ -2,12 +2,13 @@ package icu.patchouli9.tools.ModuleManager;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import icu.patchouli9.tools.EventHandler;
+import icu.patchouli9.tools.gui.SettingsRegistry;
 import icu.patchouli9.tools.modules.*;
 import org.lwjgl.input.Keyboard;
 
@@ -17,9 +18,8 @@ import icu.patchouli9.tools.Config;
 import icu.patchouli9.tools.Main;
 
 public class ModuleManager {
-
-    public static ArrayList<Module> modules;
-
+    public static ArrayList<Module> modules = new ArrayList<>();
+    public static Map<Class<?>, Module> clsToInstance = new HashMap<>();
     public static void preinit() {
         Config.init();
         try {
@@ -48,12 +48,15 @@ public class ModuleManager {
     }
 
     public static void getModules() throws IllegalAccessException {
-        modules = new ArrayList<>();
         for (Field field : modulesClass.class.getDeclaredFields()) {
-            modules.add((Module) field.get(null));
+            Module module = (Module) field.get(null);
+            modules.add(module);
+            Class<?> clazz=module.getClass();
+            clsToInstance.put(clazz, module);
         }
-    }
+        SettingsRegistry.registerSettings(Fly.class);
 
+    }
     static class modulesClass {
         public static Module NoFall = new NoFall("NoFall", Keyboard.KEY_N);
         // public static Module XYZ = new XYZ("XYZ", Keyboard.KEY_X);
@@ -61,8 +64,8 @@ public class ModuleManager {
         public static Module AutoHit = new AutoHit("AutoHit", Keyboard.KEY_EQUALS);
         public static Module InventoryMove = new InventoryMove("InventoryMove", Keyboard.KEY_M);
         public static Module GuiTest = new GuiTest("GuiTest", Keyboard.KEY_G);
-
         public static Module Speed = new Speed("Speed", Keyboard.KEY_C);
+        public static Module AntiNegative = new AntiNegative("AntiNegative", Keyboard.KEY_C);
         // public static Module Suicide = new Suicide("Suicide", Keyboard.KEY_G);
     }
 }

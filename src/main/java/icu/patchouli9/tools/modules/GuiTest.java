@@ -1,15 +1,11 @@
 package icu.patchouli9.tools.modules;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import icu.patchouli9.tools.Main;
 import icu.patchouli9.tools.ModuleManager.GuiHandler;
 import icu.patchouli9.tools.ModuleManager.Module;
+import icu.patchouli9.tools.gui.GuiSettings;
+import icu.patchouli9.tools.gui.GuiSimple;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 public class GuiTest extends Module {
     public int GuiID;
@@ -18,7 +14,7 @@ public class GuiTest extends Module {
     }
     @Override
     public void init(){
-        GuiID=GuiHandler.instance.guiRegister(GuiSimple.class);
+        GuiID=GuiHandler.instance.guiRegister(GuiSettings.class);
     }
     @Override
     public void enable() throws Exception {

@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 
 public class Module {
-
     public final String name;
     public final int key;
     public final KeyBinding keybind;
@@ -34,7 +33,6 @@ public class Module {
 
     public void set(boolean enabled) throws Exception {
         this.enabled = enabled;
-
         if (enabled) {
             enable();
             Config.json.addProperty(this.name, true);

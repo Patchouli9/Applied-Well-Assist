@@ -1,4 +1,4 @@
-package icu.patchouli9.tools.modules;
+package icu.patchouli9.tools.gui;
 
 // GuiSimple.java
 import net.minecraft.client.gui.GuiButton;

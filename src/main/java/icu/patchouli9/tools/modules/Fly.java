@@ -1,5 +1,8 @@
 package icu.patchouli9.tools.modules;
 
+import icu.patchouli9.tools.annotations.RegisterSettingEntry;
+import icu.patchouli9.tools.annotations.settingTuple;
+import icu.patchouli9.tools.types.EntryType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.settings.GameSettings;
@@ -7,6 +10,12 @@ import net.minecraft.util.MathHelper;
 
 import icu.patchouli9.tools.ModuleManager.Module;
 
+@RegisterSettingEntry(name = "Fly",
+    settings=[
+    @settingTuple(type = EntryType.TOGGLE, description = "Toggle", varName = "enabled",defaultToggle = false),
+    @settingTuple(type = EntryType.NUMBER, description = "Toggle", varName = "enabled",defaultValue = 2),
+    ]
+)
 public class Fly extends Module {
     public Fly(String name, int key) {
         super(name, key);

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.7.11",
+  "package": "icu.patchouli9.tools.mixins",
+  "refmap": "mixins.tools.refmap.json",
+  "target": "@env(DEFAULT)",
+  "mixins": [
+    "minecraft.PlayerCapabilitiesMixin",
+    "minecraft.EntityLivingBaseMixin",
+    "minecraft.PotionEffectMixin"
+  ],
+  "client": [],
+  "server": []
+}

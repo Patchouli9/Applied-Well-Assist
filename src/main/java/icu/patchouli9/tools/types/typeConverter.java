@@ -1,22 +1,24 @@
 package icu.patchouli9.tools.types;
 
-import icu.patchouli9.tools.Main;
-
 import java.text.NumberFormat;
 
+import icu.patchouli9.tools.Main;
+
 public class typeConverter {
+
     public static Object convertStringToType(String value, Class<?> targetType) {
         if (value == null) {
             return null;
         }
         if (targetType == String.class) {
             return value;
-        }else if (targetType == boolean.class || targetType == Boolean.class) {
+        } else if (targetType == boolean.class || targetType == Boolean.class) {
             return Boolean.valueOf(value);
         }
 
-        try{
-            Number number = NumberFormat.getInstance().parse(value);
+        try {
+            Number number = NumberFormat.getInstance()
+                .parse(value);
             if (targetType == float.class || targetType == Float.class) {
                 return number.floatValue();
             } else if (targetType == double.class || targetType == Double.class) {

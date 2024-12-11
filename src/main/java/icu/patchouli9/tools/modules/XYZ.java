@@ -2,7 +2,6 @@ package icu.patchouli9.tools.modules;
 
 import java.awt.Color;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.util.Vec3;
 

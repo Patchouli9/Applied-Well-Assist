@@ -1,20 +1,23 @@
 package icu.patchouli9.tools.ModuleManager;
 
-import icu.patchouli9.tools.Config;
-import icu.patchouli9.tools.Main;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 
+import icu.patchouli9.tools.Config;
+import icu.patchouli9.tools.Main;
+
 public class Module {
+
     public final String name;
     public final int key;
     public final KeyBinding keybind;
     public boolean enabled = false;
     protected final Minecraft MC = Minecraft.getMinecraft();
+
     public Module(String name, int key) {
         this.name = name;
         this.key = key;
-        this.keybind=new KeyBinding(name, key, "Patchouli9's Tools");
+        this.keybind = new KeyBinding(name, key, "Patchouli9's Tools");
     }
 
     public void disable() throws Exception {}

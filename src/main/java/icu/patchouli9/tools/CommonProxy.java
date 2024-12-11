@@ -1,14 +1,9 @@
 package icu.patchouli9.tools;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.KeyBinding;
-
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import icu.patchouli9.tools.ModuleManager.Module;
 import icu.patchouli9.tools.ModuleManager.ModuleManager;
 
 public class CommonProxy {

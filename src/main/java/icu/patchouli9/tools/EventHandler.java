@@ -14,6 +14,7 @@ import icu.patchouli9.tools.ModuleManager.Module;
 import icu.patchouli9.tools.ModuleManager.ModuleManager;
 
 public class EventHandler {
+
     public void init() {
         MinecraftForge.EVENT_BUS.register(this);
         FMLCommonHandler.instance()

@@ -61,13 +61,13 @@ public class Main {
     public static void warn(String message) {
         LOG.warn(message);
     }
+
     public static void warn(Exception e) {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         e.printStackTrace(pw);
         LOG.warn(sw);
     }
-
 
     public static void error(String message) {
         LOG.error(message);

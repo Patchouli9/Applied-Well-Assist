@@ -5,9 +5,11 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.util.ChatComponentText;
+
 import org.lwjgl.input.Keyboard;
 
 public class GuiSimple extends GuiScreen {
+
     private GuiTextField textField;
     private GuiButton button;
 

@@ -1,5 +1,20 @@
 package icu.patchouli9.tools.gui;
 
+import static icu.patchouli9.tools.gui.SettingsRegistry.SECTIONS;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.MathHelper;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+
 import icu.patchouli9.tools.Main;
 import icu.patchouli9.tools.ModuleManager.ModuleManager;
 import icu.patchouli9.tools.modules.Fly;
@@ -7,21 +22,9 @@ import icu.patchouli9.tools.types.EntryType;
 import icu.patchouli9.tools.types.Section;
 import icu.patchouli9.tools.types.Section.Setting;
 import icu.patchouli9.tools.types.typeConverter;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.MathHelper;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import static icu.patchouli9.tools.gui.SettingsRegistry.SECTIONS;
 
 public class GuiSettings extends GuiScreen {
+
     private int leftColumnX;
     private int entryHeight = 20;
     private int titleHeight = 30;
@@ -51,7 +54,6 @@ public class GuiSettings extends GuiScreen {
         this.textFields.clear();
         this.toggleButtons.clear();
 
-
         // totalHeight = SETTINGS.size() * entryHeight;
         maxVisibleHeight = this.height - topMargin - 50; // 50 for finish-button
 
@@ -66,13 +68,21 @@ public class GuiSettings extends GuiScreen {
                     switch (setting.type) {
                         case TEXT:
                             GuiTextField textField = new GuiTextField(fontRendererObj, rightColumnX, y - 5, 60, 15);
-                            textField.setText(setting.field.get(section.module).toString());
+                            textField.setText(
+                                setting.field.get(section.module)
+                                    .toString());
                             textFields.add(textField);
                             textIndex2settings.add(setting);
                             break;
                         case TOGGLE:
                             boolean current = (Boolean) setting.field.get(section.module);
-                            GuiButton toggleButton = new GuiButton(100 + i, rightColumnX, y - 5, 60, 15, current ? "开启" : "关闭");
+                            GuiButton toggleButton = new GuiButton(
+                                100 + i,
+                                rightColumnX,
+                                y - 5,
+                                60,
+                                15,
+                                current ? "开启" : "关闭");
                             this.buttonList.add(toggleButton);
                             toggleButtons.add(toggleButton);
 
@@ -148,7 +158,6 @@ public class GuiSettings extends GuiScreen {
         this.mouseY = mouseY;
         this.drawDefaultBackground();
 
-
         String title = "设置";
         drawCenteredString(fontRendererObj, title, width / 2, 15, 0xFFFFFF);
 
@@ -156,7 +165,6 @@ public class GuiSettings extends GuiScreen {
 
         int textFieldCount = 0;
         int toggleCount = 0;
-
 
         for (Section section : SECTIONS) {
             if (y + titleHeight >= topMargin && y <= topMargin + maxVisibleHeight) {
@@ -227,10 +235,9 @@ public class GuiSettings extends GuiScreen {
 
                             Class<?> targetType = setting.field.getType();
 
-                            Object value= typeConverter.convertStringToType(textVal,targetType);
+                            Object value = typeConverter.convertStringToType(textVal, targetType);
 
                             setting.field.set(section.module, value);
-
 
                             break;
                         case TOGGLE:

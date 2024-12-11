@@ -15,7 +15,13 @@ import icu.patchouli9.tools.Config;
 import icu.patchouli9.tools.EventHandler;
 import icu.patchouli9.tools.Main;
 import icu.patchouli9.tools.gui.SettingsRegistry;
-import icu.patchouli9.tools.modules.*;
+import icu.patchouli9.tools.modules.AntiNegative;
+import icu.patchouli9.tools.modules.AutoHit;
+import icu.patchouli9.tools.modules.Fly;
+import icu.patchouli9.tools.modules.GuiTest;
+import icu.patchouli9.tools.modules.InventoryMove;
+import icu.patchouli9.tools.modules.NoFall;
+import icu.patchouli9.tools.modules.Speed;
 
 public class ModuleManager {
 

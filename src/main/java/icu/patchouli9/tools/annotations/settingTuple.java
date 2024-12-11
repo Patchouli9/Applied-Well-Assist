@@ -1,6 +1,8 @@
 package icu.patchouli9.tools.annotations;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 import icu.patchouli9.tools.types.EntryType;
 

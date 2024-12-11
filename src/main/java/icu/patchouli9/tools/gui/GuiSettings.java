@@ -75,6 +75,8 @@ public class GuiSettings extends GuiScreen {
                             textIndex2settings.add(setting);
                             break;
                         case TOGGLE:
+                            Main.info("field is " + setting.field);
+                            Main.info("module is" + section.module);
                             boolean current = (Boolean) setting.field.get(section.module);
                             GuiButton toggleButton = new GuiButton(
                                 100 + i,

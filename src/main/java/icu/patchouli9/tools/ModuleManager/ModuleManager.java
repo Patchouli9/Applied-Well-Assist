@@ -2,7 +2,6 @@ package icu.patchouli9.tools.ModuleManager;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.lwjgl.input.Keyboard;
@@ -26,7 +25,6 @@ import icu.patchouli9.tools.modules.Speed;
 public class ModuleManager {
 
     public static ArrayList<Module> modules = new ArrayList<>();
-    public static Map<Class<?>, Module> clsToInstance = new HashMap<>();
 
     public static void preinit() {
         Config.init();
@@ -57,13 +55,12 @@ public class ModuleManager {
 
     public static void getModules() throws IllegalAccessException {
         for (Field field : modulesClass.class.getDeclaredFields()) {
-            Module module = (Module) field.get(null);
-            modules.add(module);
-            Class<?> clazz = module.getClass();
-            clsToInstance.put(clazz, module);
+            Object module = field.get(null);
+            modules.add((Module) module);
+            SettingsRegistry.registerSettings(module);
         }
-        SettingsRegistry.registerSettings(Fly.class);
-
+        // SettingsRegistry.registerSettings(Fly.class);
+        // SettingsRegistry.registerSettings(Speed.class);
     }
 
     public static class modulesClass {

@@ -7,7 +7,13 @@ import net.minecraft.client.settings.KeyBinding;
 import org.lwjgl.input.Keyboard;
 
 import icu.patchouli9.tools.ModuleManager.Module;
+import icu.patchouli9.tools.annotations.RegisterSettingEntry;
+import icu.patchouli9.tools.annotations.settingTuple;
+import icu.patchouli9.tools.types.EntryType;
 
+@RegisterSettingEntry(
+    name = "关闭物品栏无需重新按下移动键",
+    settings = { @settingTuple(type = EntryType.TOGGLE, description = "启用", varName = "enabled") })
 public class InventoryMove extends Module {
 
     public InventoryMove(String name, int key) {

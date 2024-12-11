@@ -4,7 +4,13 @@ import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.network.play.client.C03PacketPlayer;
 
 import icu.patchouli9.tools.ModuleManager.Module;
+import icu.patchouli9.tools.annotations.RegisterSettingEntry;
+import icu.patchouli9.tools.annotations.settingTuple;
+import icu.patchouli9.tools.types.EntryType;
 
+@RegisterSettingEntry(
+    name = "不再牢大",
+    settings = { @settingTuple(type = EntryType.TOGGLE, description = "启用", varName = "enabled") })
 public class NoFall extends Module {
 
     public NoFall(String name, int key) {

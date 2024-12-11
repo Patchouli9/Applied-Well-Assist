@@ -10,7 +10,7 @@ import icu.patchouli9.tools.annotations.settingTuple;
 import icu.patchouli9.tools.types.EntryType;
 
 @RegisterSettingEntry(
-    name = "Fly",
+    name = "飞起来!",
     settings = { @settingTuple(type = EntryType.TOGGLE, description = "启用", varName = "enabled"),
         @settingTuple(type = EntryType.TEXT, description = "疾跑加速倍率", varName = "sprintMultiplier") })
 public class Fly extends Module {

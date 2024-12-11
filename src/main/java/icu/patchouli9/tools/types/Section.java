@@ -4,12 +4,10 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import icu.patchouli9.tools.ModuleManager.Module;
-
 public class Section {
 
     public String name = "Section";
-    public Module module;
+    public Object module;
     public List<Setting> settings = new ArrayList<>();
 
     public static class Setting {

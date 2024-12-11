@@ -12,7 +12,13 @@ import net.minecraft.network.play.client.C02PacketUseEntity;
 import net.minecraft.util.AxisAlignedBB;
 
 import icu.patchouli9.tools.ModuleManager.Module;
+import icu.patchouli9.tools.annotations.RegisterSettingEntry;
+import icu.patchouli9.tools.annotations.settingTuple;
+import icu.patchouli9.tools.types.EntryType;
 
+@RegisterSettingEntry(
+    name = "追着砍",
+    settings = { @settingTuple(type = EntryType.TOGGLE, description = "启用", varName = "enabled") })
 public class AutoHit extends Module {
 
     public AutoHit(String name, int key) {

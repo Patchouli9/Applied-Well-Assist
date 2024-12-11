@@ -1,6 +1,8 @@
 package icu.patchouli9.tools;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,6 +61,13 @@ public class Main {
     public static void warn(String message) {
         LOG.warn(message);
     }
+    public static void warn(Exception e) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        LOG.warn(sw);
+    }
+
 
     public static void error(String message) {
         LOG.error(message);

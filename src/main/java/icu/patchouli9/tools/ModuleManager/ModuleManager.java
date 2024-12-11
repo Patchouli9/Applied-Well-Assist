@@ -57,7 +57,7 @@ public class ModuleManager {
         SettingsRegistry.registerSettings(Fly.class);
 
     }
-    static class modulesClass {
+    public static class modulesClass {
         public static Module NoFall = new NoFall("NoFall", Keyboard.KEY_N);
         // public static Module XYZ = new XYZ("XYZ", Keyboard.KEY_X);
         public static Module Fly = new Fly("Fly", Keyboard.KEY_H);

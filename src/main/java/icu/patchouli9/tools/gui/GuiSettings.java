@@ -6,18 +6,18 @@ import icu.patchouli9.tools.modules.Fly;
 import icu.patchouli9.tools.types.EntryType;
 import icu.patchouli9.tools.types.Section;
 import icu.patchouli9.tools.types.Section.Setting;
+import icu.patchouli9.tools.types.typeConverter;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 import static icu.patchouli9.tools.gui.SettingsRegistry.SECTIONS;
 
@@ -62,22 +62,25 @@ public class GuiSettings extends GuiScreen {
             y += titleHeight;
             for (int i = 0; i < section.settings.size(); i++) {
                 Setting setting = section.settings.get(i);
-                switch (setting.type) {
-                    case NUMBER:
-                        GuiTextField textField = new GuiTextField(fontRendererObj, rightColumnX, y - 5, 60, 20);
-                        textField.setText(setting.defaultValue.toString());
-                        textFields.add(textField);
+                try {
+                    switch (setting.type) {
+                        case TEXT:
+                            GuiTextField textField = new GuiTextField(fontRendererObj, rightColumnX, y - 5, 60, 15);
+                            textField.setText(setting.field.get(section.module).toString());
+                            textFields.add(textField);
+                            textIndex2settings.add(setting);
+                            break;
+                        case TOGGLE:
+                            boolean current = (Boolean) setting.field.get(section.module);
+                            GuiButton toggleButton = new GuiButton(100 + i, rightColumnX, y - 5, 60, 15, current ? "开启" : "关闭");
+                            this.buttonList.add(toggleButton);
+                            toggleButtons.add(toggleButton);
 
-                        textIndex2settings.add(setting);
-                        break;
-                    case TOGGLE:
-                        boolean current = (Boolean) setting.defaultValue;
-                        GuiButton toggleButton = new GuiButton(100 + i, rightColumnX, y - 5, 60, 20, current ? "开启" : "关闭");
-                        this.buttonList.add(toggleButton);
-                        toggleButtons.add(toggleButton);
-
-                        buttonIndex2settings.add(setting);
-                        break;
+                            buttonIndex2settings.add(setting);
+                            break;
+                    }
+                } catch (Exception e) {
+                    Main.warn(e);
                 }
                 y += entryHeight;
             }
@@ -123,6 +126,7 @@ public class GuiSettings extends GuiScreen {
     protected void actionPerformed(GuiButton button) {
         if (button.id == 9999) {
             saveSettings();
+            this.mc.thePlayer.addChatComponentMessage(new ChatComponentText("Changes save!"));
             this.mc.displayGuiScreen(null);
             return;
         }
@@ -131,9 +135,8 @@ public class GuiSettings extends GuiScreen {
         if (index >= 0 && index < buttonIndex2settings.size()) {
             Setting setting = buttonIndex2settings.get(index);
             if (setting.type == EntryType.TOGGLE) {
-                boolean current = (Boolean) setting.defaultValue;
+                boolean current = Objects.equals(button.displayString, "开启");
                 current = !current;
-                setting.defaultValue = current;
                 button.displayString = current ? "开启" : "关闭";
             }
         }
@@ -165,7 +168,7 @@ public class GuiSettings extends GuiScreen {
                 if (y + entryHeight >= topMargin && y <= topMargin + maxVisibleHeight) {
                     drawString(fontRendererObj, setting.label + ":", leftColumnX, y, 0xFFFFFF);
                     switch (setting.type) {
-                        case NUMBER:
+                        case TEXT:
                             GuiTextField field = textFields.get(textFieldCount);
                             field.yPosition = y - 5;
                             field.drawTextBox();
@@ -180,7 +183,7 @@ public class GuiSettings extends GuiScreen {
                     }
                 } else {
                     switch (setting.type) {
-                        case NUMBER:
+                        case TEXT:
                             GuiTextField field = textFields.get(textFieldCount++);
                             field.yPosition = y - 5;
                             break;
@@ -213,22 +216,34 @@ public class GuiSettings extends GuiScreen {
     private void saveSettings() {
         int textFieldIndex = 0;
         int toggleIndex = 0;
-
+        Fly fly = (Fly) ModuleManager.modulesClass.Fly;
         for (Section section : SECTIONS) {
-            for (Setting setting: section.settings) {
+            for (Setting setting : section.settings) {
                 try {
                     switch (setting.type) {
-                        case NUMBER:
-                            String textVal = textFields.get(textFieldIndex++).getText();
-                            setting.field.set(section.module, Double.parseDouble(textVal));
+                        case TEXT:
+                            GuiTextField textField = textFields.get(textFieldIndex++);
+                            String textVal = textField.getText();
+
+                            Class<?> targetType = setting.field.getType();
+
+                            Object value= typeConverter.convertStringToType(textVal,targetType);
+
+                            setting.field.set(section.module, value);
+
+
                             break;
                         case TOGGLE:
-                            boolean boolVal = (Boolean) setting.defaultValue;
+                            GuiButton button = buttonList.get(toggleIndex++);
+                            boolean boolVal = Objects.equals(button.displayString, "开启");
                             setting.field.set(section.module, boolVal);
+
+                            setting.field.set(section.module, boolVal);
+
                             break;
-                        }
+                    }
                 } catch (Exception e) {
-                    Main.info(Arrays.toString(e.getStackTrace()));
+                    Main.warn(e);
                 }
             }
         }

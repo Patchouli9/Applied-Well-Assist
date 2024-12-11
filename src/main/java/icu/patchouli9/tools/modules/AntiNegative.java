@@ -33,10 +33,6 @@ public class AntiNegative extends Module {
         }
 
         player.removePotionEffect(Potion.digSlowdown.getId());
-
-
-
-
     }
 
 }

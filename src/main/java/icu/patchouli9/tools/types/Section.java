@@ -14,13 +14,11 @@ public class Section {
     public static class Setting {
         public String label;
         public EntryType type;
-        public Object defaultValue;
         public Field field;
         public Class<?> clazz;
-        public Setting(String label, EntryType type, Object defaultValue, Field field) {
+        public Setting(String label, EntryType type, Field field) {
             this.label = label;
             this.type = type;
-            this.defaultValue = defaultValue;
             this.field = field;
         }
     }

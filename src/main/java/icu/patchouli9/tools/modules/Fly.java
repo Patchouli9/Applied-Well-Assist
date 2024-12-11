@@ -3,7 +3,6 @@ package icu.patchouli9.tools.modules;
 import icu.patchouli9.tools.annotations.RegisterSettingEntry;
 import icu.patchouli9.tools.annotations.settingTuple;
 import icu.patchouli9.tools.types.EntryType;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.MathHelper;
@@ -11,15 +10,16 @@ import net.minecraft.util.MathHelper;
 import icu.patchouli9.tools.ModuleManager.Module;
 
 @RegisterSettingEntry(name = "Fly",
-    settings=[
-    @settingTuple(type = EntryType.TOGGLE, description = "Toggle", varName = "enabled",defaultToggle = false),
-    @settingTuple(type = EntryType.NUMBER, description = "Toggle", varName = "enabled",defaultValue = 2),
-    ]
+    settings={
+        @settingTuple(type = EntryType.TOGGLE, description = "启用", varName = "enabled"),
+        @settingTuple(type = EntryType.TEXT, description = "疾跑加速倍率", varName = "sprintMultiplier")
+    }
 )
 public class Fly extends Module {
     public Fly(String name, int key) {
         super(name, key);
     }
+    public float sprintMultiplier = 2;
 
     @Override
     public void update() {
@@ -32,7 +32,7 @@ public class Fly extends Module {
         player.motionZ = 0;
 
         float multiplier = 1;
-        if (gameSettings.keyBindSprint.getIsKeyPressed()) multiplier = 3;
+        if (gameSettings.keyBindSprint.getIsKeyPressed()) multiplier *= sprintMultiplier;
 
         float strafe = 0.0F;
         float forward = 0.0F;
@@ -44,9 +44,6 @@ public class Fly extends Module {
         if (gameSettings.keyBindRight.getIsKeyPressed()) --strafe;
         if (gameSettings.keyBindJump.getIsKeyPressed()) ++upward;
         if (gameSettings.keyBindSneak.getIsKeyPressed()) --upward;
-
-        // player.motionX = moveForward;
-        // player.motionZ = moveStrafe;
 
         player.motionY = upward * multiplier;
 

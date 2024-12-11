@@ -23,19 +23,12 @@ public class SettingsRegistry {
         SECTION.name = ann.name();
         SECTION.module = ModuleManager.clsToInstance.get(configClass);
         for (settingTuple p : ann.settings()) {
-            Main.info("???___???");
             try {
                 Field field = configClass.getField(p.varName());
-                Object defVal;
-                if (p.type() == EntryType.NUMBER) {
-                    defVal = p.defaultValue();
-                } else {
-                    defVal = p.defaultToggle();
-                }
-                SECTION.settings.add(new Section.Setting(p.description(), p.type(), defVal, field));
+                SECTION.settings.add(new Section.Setting(p.description(), p.type(), field));
 
             } catch (Exception e) {
-                Main.warn(Arrays.toString(e.getStackTrace()));
+                Main.warn(e);
             }
         }
         SECTIONS.add(SECTION);

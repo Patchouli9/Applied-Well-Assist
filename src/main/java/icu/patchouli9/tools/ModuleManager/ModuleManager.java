@@ -76,4 +76,3 @@ public class ModuleManager {
         // public static Module Suicide = new Suicide("Suicide", Keyboard.KEY_G);
     }
 }
-// TODO: 在按住方向键, 打开 E再关闭, 需要再按下方向键.

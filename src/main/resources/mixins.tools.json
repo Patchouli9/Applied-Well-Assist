@@ -5,9 +5,7 @@
   "refmap": "mixins.tools.refmap.json",
   "target": "@env(DEFAULT)",
   "mixins": [
-    "minecraft.PlayerCapabilitiesMixin",
-    "minecraft.EntityLivingBaseMixin",
-    "minecraft.PotionEffectMixin"
+    "minecraft.NetHandlerPlayerClientMixin"
   ],
   "client": [],
   "server": []

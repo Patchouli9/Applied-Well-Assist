@@ -17,9 +17,7 @@ public enum Mixin {
     //
 
     // Replace with your own mixins:
-    EntityLivingBaseMixin("minecraft.entity.EntityLivingBase", Side.CLIENT, VANILLA),
-    PotionEffectMixin("net.minecraft.potion.PotionEffect", Side.CLIENT, VANILLA),
-    PlayerCapabilitiesMixin("minecraft.PlayerCapabilitiesMixin", Side.CLIENT, VANILLA);// ,
+    NetHandlerPlayerClientMixin("net.minecraft.client.network.NetHandlerPlayClient", Side.CLIENT, VANILLA);
     // You may also require multiple mods to be loaded if your mixin requires both
     // GT_Block_Ores_AbstractMixin("gregtech.GT_Block_Ores_AbstractMixin", GREGTECH, VANILLA);
 

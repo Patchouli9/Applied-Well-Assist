@@ -14,7 +14,7 @@ import icu.patchouli9.tools.annotations.settingTuple;
 import icu.patchouli9.tools.types.EntryType;
 
 @RegisterSettingEntry(
-    name = "我就感觉到快",
+    name = "一天一苹果",
     settings = { @settingTuple(type = EntryType.TOGGLE, description = "启用", varName = "enabled") })
 public class AntiNegative extends Module {
 
@@ -34,8 +34,8 @@ public class AntiNegative extends Module {
         if (modifier != null) {
             speedAttr.removeModifier(modifier);
         }
-
-        player.removePotionEffect(Potion.digSlowdown.getId());
+        player.removePotionEffect(Potion.moveSlowdown.id);
+        player.removePotionEffect(Potion.digSlowdown.id);
     }
 
 }

@@ -1,0 +1,78 @@
+package icu.patchouli9.awa.ModuleManager;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.lwjgl.input.Keyboard;
+
+import com.google.gson.JsonElement;
+
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import icu.patchouli9.awa.Config;
+import icu.patchouli9.awa.EventHandler;
+import icu.patchouli9.awa.Main;
+import icu.patchouli9.awa.gui.SettingsRegistry;
+import icu.patchouli9.awa.modules.AntiNegative;
+import icu.patchouli9.awa.modules.AutoHit;
+import icu.patchouli9.awa.modules.Fly;
+import icu.patchouli9.awa.modules.GuiTest;
+import icu.patchouli9.awa.modules.InventoryMove;
+import icu.patchouli9.awa.modules.NoFall;
+import icu.patchouli9.awa.modules.Speed;
+
+public class ModuleManager {
+
+    public static ArrayList<Module> modules = new ArrayList<>();
+
+    public static void preinit() {
+        Config.init();
+        try {
+            getModules();
+        } catch (IllegalAccessException e) {
+            Main.LOG.warn("GetModules failed", new RuntimeException(e));
+        }
+        NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, GuiHandler.instance);
+    }
+
+    public static void init() throws Exception {
+        if (ModuleManager.modules != null && Config.json != null) {
+            for (Map.Entry<String, JsonElement> entry : Config.json.entrySet()) {
+                String name = entry.getKey();
+                JsonElement value = entry.getValue();
+                ModuleManager.modules.stream()
+                    .filter(module -> module.name.equals(name))
+                    .forEach(module -> module.enabled = value.getAsBoolean());
+            }
+            for (Module module : ModuleManager.modules) {
+                ClientRegistry.registerKeyBinding(module.keybind);
+                module.init();
+            }
+        }
+        new EventHandler().init();
+    }
+
+    public static void getModules() throws IllegalAccessException {
+        for (Field field : modulesClass.class.getDeclaredFields()) {
+            Object module = field.get(null);
+            modules.add((Module) module);
+            SettingsRegistry.registerSettings(module);
+        }
+        // SettingsRegistry.registerSettings(Fly.class);
+        // SettingsRegistry.registerSettings(Speed.class);
+    }
+
+    public static class modulesClass {
+
+        public static Module NoFall = new NoFall("NoFall", Keyboard.KEY_N);
+        // public static Module XYZ = new XYZ("XYZ", Keyboard.KEY_X);
+        public static Module Fly = new Fly("Fly", Keyboard.KEY_H);
+        public static Module AutoHit = new AutoHit("AutoHit", Keyboard.KEY_EQUALS);
+        public static Module InventoryMove = new InventoryMove("InventoryMove", Keyboard.KEY_M);
+        public static Module GuiTest = new GuiTest("GuiTest", Keyboard.KEY_G);
+        public static Module Speed = new Speed("Speed", Keyboard.KEY_C);
+        public static Module AntiNegative = new AntiNegative("AntiNegative", Keyboard.KEY_C);
+        // public static Module Suicide = new Suicide("Suicide", Keyboard.KEY_G);
+    }
+}

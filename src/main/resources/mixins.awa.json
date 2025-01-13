@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.7.11",
+  "package": "icu.patchouli9.awa.mixins",
+  "refmap": "mixins.tools.refmap.json",
+  "target": "@env(DEFAULT)",
+  "mixins": [
+    "minecraft.NetHandlerPlayerClientMixin"
+  ],
+  "client": [],
+  "server": []
+}
